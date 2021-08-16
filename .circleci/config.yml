@@ -56,7 +56,7 @@ jobs:
 
   docker-build:
     docker:
-      - image: python:3.7.3
+      - image: circleci/python:3.7.3
     steps:
       - checkout
       - run:
@@ -66,7 +66,7 @@ jobs:
             make build
   docker-push:
     docker:
-      - image: python:3.7.3
+      - image: circleci/python:3.7.3
     steps:
       - checkout
       - run:
