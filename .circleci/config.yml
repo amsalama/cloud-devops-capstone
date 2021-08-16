@@ -73,7 +73,7 @@ jobs:
           name: push image to Dockerhub
           command: |
             docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-            make ppush
+            make push
 
 workflows:
   default:

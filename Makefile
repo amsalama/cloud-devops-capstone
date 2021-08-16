@@ -14,7 +14,7 @@ build:
 	docker build -t $(NAME) .
 	docker tag $(NAME) $(NAME):$(VERSION)
 
-push: build
+push:
 	docker push $(NAME)
 
 ppush: build
