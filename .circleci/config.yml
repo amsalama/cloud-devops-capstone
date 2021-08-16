@@ -63,16 +63,16 @@ jobs:
         command: |
           docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
           make build
-  docker-push:
-    docker:
-      - image: python:3.7.3-stretch
-    steps:
-      - checkout
-      - run:
-        name: push image to Dockerhub
-        command: |
-          docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-          make ppush
+  # docker-push:
+  #   docker:
+  #     - image: python:3.7.3-stretch
+  #   steps:
+  #     - checkout
+  #     - run:
+  #       name: push image to Dockerhub
+  #       command: |
+  #         docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+  #         make ppush
 
 workflows:
   default:
