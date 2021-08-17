@@ -56,9 +56,12 @@ jobs:
 
   docker-build:
     docker:
-    machine: true
+      - image: circleci/python:3.7.3
+    # machine: true
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: build docker image
           command: |
@@ -66,9 +69,12 @@ jobs:
             make build
   docker-push:
     docker:
-    machine: true
+      - image: circleci/python:3.7.3
+    # machine: true
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: push image to Dockerhub
           command: |
