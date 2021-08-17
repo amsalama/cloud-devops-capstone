@@ -54,10 +54,10 @@ jobs:
             . venv/bin/activate
             make lint
 
-  docker-build:
+  docker-build-push:
     docker:
-      - image: circleci/python:3.7.3
-    # machine: true
+      # - image: circleci/python:3.7.3
+    machine: true
     steps:
       - checkout
       - setup_remote_docker:
@@ -66,26 +66,11 @@ jobs:
           name: build docker image
           command: |
             docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-            make build
-  docker-push:
-    docker:
-      - image: circleci/python:3.7.3
-    # machine: true
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: push image to Dockerhub
-          command: |
-            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-            make push
+            make ppush
 
 workflows:
   default:
     jobs:
       - build
-      - docker-build:
+      - docker-build-push:
           requires: [build]
-      - docker-push:
-          requires: [docker-build]

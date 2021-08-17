@@ -4,8 +4,8 @@
 # Dockerfile should pass hadolint
 # app.py should pass pylint
 # (Optional) Build a simple integration test
-NAME = amsalama/dockerbeat
-PNAME = amsalama/dockerbeat
+NAME = amsalama/udacitycapstone
+PNAME = amsalama/udacitycapstone
 VERSION = 1.0.0
 
 all: build
