@@ -80,7 +80,10 @@ jobs:
             echo "eksctl version"
             eksctl version
             # curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl
-            curl --silent -L https://storage.googleapis.com/kubernetes-release/release/1.17.1/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl
+            #curl --silent -L https://storage.googleapis.com/kubernetes-release/release/1.17.1/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl
+            wget -q https://storage.googleapis.com/kubernetes-release/release/$(wget -q -O - https://storage.googleapis.com/kubernetes-release/release/stable.txt -O -)/bin/linux/amd64/kubectl -O kubectl
+            chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+
             chmod +x /usr/local/bin/kubectl
             # mv kubectl /usr/local/bin
             kubectl version
