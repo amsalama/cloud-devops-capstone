@@ -89,34 +89,34 @@ jobs:
             ls -l /usr/local/bin/kubectl
             pwd
             ls -l
-      # - run:
-      #     name: Create Cluster
-      #     command: |
-      #       eksctl create cluster -f ./eks-config.yml
-      # - run:
-      #     name: Deploy blue container
-      #     command: |
-      #       kubectl apply -f ./blue.yml
-      # - run:
-      #     name: Check on the status of the ReplicationController using this command
-      #     command: |
-      #       kubectl describe replicationcontrollers
-      #       kubectl describe services bluegreenlb
-      # - run:
-      #     name: Deploy green container
-      #     command: |
-      #       kubectl apply -f ./green.yml
-      # - run:
-      #     name: Check on the status of the ReplicationController using this command
-      #     command: |
-      #       kubectl describe replicationcontrollers
-      #       kubectl describe services bluegreenlb
+      - run:
+          name: Create Cluster
+          command: |
+            eksctl create cluster -f ./eks-config.yml
+      - run:
+          name: Deploy blue container
+          command: |
+            kubectl apply -f ./blue.yml
+      - run:
+          name: Check on the status of the ReplicationController using this command
+          command: |
+            kubectl describe replicationcontrollers
+            kubectl describe services bluegreenlb
+      - run:
+          name: Deploy green container
+          command: |
+            kubectl apply -f ./green.yml
+      - run:
+          name: Check on the status of the ReplicationController using this command
+          command: |
+            kubectl describe replicationcontrollers
+            kubectl describe services bluegreenlb
 
 workflows:
   default:
     jobs:
-      # - build
-      # - docker-build-push:
-      #     requires: [build]
-      - k8sdeploy
-        # requires: [docker-build-push]
+      - build
+      - docker-build-push:
+          requires: [build]
+      - k8sdeploy:
+        requires: [docker-build-push]
