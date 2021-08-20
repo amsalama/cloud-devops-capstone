@@ -71,6 +71,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run: yum -y install tar gzip curl
       - run:
           name: Install EKSCTL and k
           command: |
