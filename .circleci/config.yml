@@ -65,6 +65,45 @@ jobs:
           command: |
             docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
             make ppush
+            make NAME=amsalama/udacitycapstonegreen Dockerfile=Dockerfilegreen PNAME=amsalama/udacitycapstonegreen ppush
+  k8sdeploy:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Install EKSCTL and k
+          command: |
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            sudo mv /tmp/eksctl /usr/local/bin
+            echo "eksctl version"
+            eksctl version
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            kubectl version
+            pwd
+            ls -l
+      # - run:
+      #     name: Create Cluster
+      #     command: |
+      #       eksctl create cluster -f ./eks-config.yml
+      # - run:
+      #     name: Deploy blue container
+      #     command: |
+      #       kubectl apply -f ./blue.yml
+      # - run:
+      #     name: Check on the status of the ReplicationController using this command
+      #     command: |
+      #       kubectl describe replicationcontrollers
+      #       kubectl describe services bluegreenlb
+      # - run:
+      #     name: Deploy green container
+      #     command: |
+      #       kubectl apply -f ./green.yml
+      # - run:
+      #     name: Check on the status of the ReplicationController using this command
+      #     command: |
+      #       kubectl describe replicationcontrollers
+      #       kubectl describe services bluegreenlb
 
 workflows:
   default:
@@ -72,3 +111,5 @@ workflows:
       - build
       - docker-build-push:
           requires: [build]
+      - k8sdeploy:
+          requires: [docker-build-push]

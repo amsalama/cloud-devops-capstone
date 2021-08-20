@@ -1,17 +1,12 @@
-## The Makefile includes instructions on environment setup and lint tests
-# Create and activate a virtual environment
-# Install dependencies in requirements.txt
-# Dockerfile should pass hadolint
-# app.py should pass pylint
-# (Optional) Build a simple integration test
 NAME = amsalama/udacitycapstone
 PNAME = amsalama/udacitycapstone
 VERSION = 1.0.0
+Dockerfile=Dockerfile
 
 all: build
 
 build:
-	docker build -t $(NAME) .
+	docker build -f ${Dockerfile}  -t $(NAME) .
 	docker tag $(NAME) $(NAME):$(VERSION)
 
 push:
