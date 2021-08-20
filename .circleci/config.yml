@@ -86,7 +86,7 @@ jobs:
 
             chmod +x /usr/local/bin/kubectl
             # mv kubectl /usr/local/bin
-            which  kubectl
+            ls -l /usr/local/bin/kubectl
             pwd
             ls -l
       # - run:
