@@ -79,8 +79,8 @@ jobs:
             mv /tmp/eksctl /usr/local/bin
             echo "eksctl version"
             eksctl version
-            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-            mv kubectl /usr/local/bin
+            curl -L -o /dev/null  -w /usr/local/bin "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            # mv kubectl /usr/local/bin
             kubectl version
             pwd
             ls -l
@@ -110,8 +110,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - build
-      - docker-build-push:
-          requires: [build]
-      - k8sdeploy:
-          requires: [docker-build-push]
+      # - build
+      # - docker-build-push:
+      #     requires: [build]
+      - k8sdeploy
+        # requires: [docker-build-push]
