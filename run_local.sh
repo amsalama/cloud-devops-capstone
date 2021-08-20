@@ -8,7 +8,7 @@ echo "Create Cluster using eks "
 #eksctl create nodegroup  --config-file=eks-config.yaml 
 eksctl create cluster -f eks-config.yml
 AWS_REGION=us-west-2
-AWS_ACCOUNT_ID=214721723678
+AWS_ACCOUNT_ID=XXXX
 
 echo "Locally output is minikube"
 echo "Change configuration to my aws account"
